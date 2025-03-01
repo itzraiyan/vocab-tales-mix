@@ -33,9 +33,10 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     const positionTooltip = () => {
       if (!isOpen || !tooltipRef.current || !wordRef.current) return;
       
-      const tooltipEl = tooltipRef.current;
-      const wordEl = wordRef.current;
-      const wordRect = wordEl.getBoundingClientRect();
+      const tooltipEl = tooltipRef.current.querySelector('.tooltip-content') as HTMLElement;
+      if (!tooltipEl) return;
+      
+      const wordRect = wordRef.current.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
       
       // Reset any previous positioning
@@ -85,7 +86,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block" ref={tooltipRef}>
+    <span className="relative inline-block" ref={tooltipRef}>
       <span 
         ref={wordRef}
         className="english-word"
@@ -95,7 +96,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       </span>
       
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] transform -translate-x-1/2 left-1/2 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in">
+        <div className="tooltip-content absolute z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in">
           <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 rotate-45 bg-white dark:bg-gray-900 border-t border-l border-border"></div>
           
           <div className="flex justify-between items-center mb-2">
@@ -127,7 +128,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
           </div>
         </div>
       )}
-    </div>
+    </span>
   );
 };
 
