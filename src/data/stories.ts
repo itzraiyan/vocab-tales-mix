@@ -25,372 +25,512 @@ export interface Story {
 export const stories: Story[] = [
   {
     id: 1,
-    title: "The Adventure of a Lifetime",
-    description: "A young explorer discovers a hidden world beneath the streets of Kolkata.",
-    category: "adventure",
+    title: "নির্জনতার সঙ্গী (The Companion of Solitude)",
+    description: "একজন নিঃসঙ্গ ব্যক্তির অভিজ্ঞতা যেখানে তিনি প্রকৃতির মধ্যে নতুন অর্থ খুঁজে পান।",
+    category: "philosophy",
     readingTime: 5,
     content: [
-      "সকাল বেলা রাজীব একটি চিঠি পেল। It was a {mysterious} letter with no return address.",
-      "\"এটা কিভাবে আসল?\" রাজীব ভাবল। He felt {curious} about who might have sent it.",
-      "চিঠিতে লেখা ছিল, \"If you want to find the {treasure}, follow the map.\" চিঠির সাথে একটি পুরানো {map} ছিল।",
-      "রাজীব দেখল মানচিত্রে কলকাতার পুরানো এলাকার একটি secret {passage} চিহ্নিত করা আছে। This was the {beginning} of an exciting adventure.",
-      "সে ভাবল, \"I should {explore} this hidden passage.\" রাজীব তার {backpack} নিয়ে রওনা দিল।",
-      "পুরানো বাড়ির নিচে, he found a {hidden} door that led to an underground tunnel [r1].",
-      "The tunnel was dark and {narrow}, but রাজীব তার টর্চ জ্বালাল and continued walking.",
-      "After walking for what seemed like hours, he discovered a {massive} underground library filled with ancient books.",
-      "\"এই অসাধারণ! What a {discovery}!\" he exclaimed.",
-      "The library had been {abandoned} for decades, but every book was perfectly preserved.",
-      "রাজীব একটি বই খুলল and found that it contained {valuable} information about Bengal's history.",
-      "He decided to {share} his discovery with the city museum. \"লোকেদের জানা উচিত এই সম্পদের কথা,\" he thought.",
-      "His {journey} had led him to something far more precious than any material treasure.",
-      "Sometimes the greatest {adventures} are those that expand our knowledge and understanding of the world [r2]."
+      "একজন {hermit} গভীর জঙ্গলে বসবাস করত। সে খুব {taciturn} ছিল, তাই গ্রামবাসীরা তাকে ভয় পেত। কিন্তু সে ছিল {benevolent}। একদিন এক {naive} শিশু হারিয়ে গেলে সে তাকে সাহায্য করে। শিশুটি তার {benevolence} দেখে অবাক হয়ে যায়।",
+      "শিশুটি জিজ্ঞেস করল, \"আপনি এত {austere} জীবন কেন বেছে নিয়েছেন?\" {hermit} একটু মুচকি হেসে জবাব দিল, \"নির্জনতা আমাকে {introspection}-এর সুযোগ দেয়।\"",
+      "সেই দিন থেকে শিশুটি প্রায়ই {hermit}-এর কুটিরে যেত। ধীরে ধীরে গ্রামবাসীরাও বুঝতে পারল যে এই {recluse} আসলে একজন {erudite} মানুষ যিনি জীবনের গভীরতা সম্পর্কে অনেক কিছু জানেন [p1]।",
+      "একদিন ভয়ঙ্কর ঝড় হল। গ্রামের অনেক বাড়ি {dilapidated} হয়ে গেল। {hermit} তার {frugal} সঞ্চয় দিয়ে সবাইকে সাহায্য করল। তার এই {altruistic} আচরণ দেখে সবাই বিস্মিত হল।",
+      "গ্রামবাসীরা তাকে {venerate} করতে শুরু করল এবং তার {sagacity} সম্পর্কে কথা বলত। তবুও সে {ostentatious} হয়ে উঠল না। সে বলত, \"{Humility} হল প্রকৃত জ্ঞানের প্রথম পাঠ।\"",
+      "সময়ের সাথে সাথে গ্রামে অনেক লোক তার কাছে {esoteric} জ্ঞান শিখতে আসতে লাগল। তার {eloquence} এবং {perspicacity} মানুষকে মুগ্ধ করত।",
+      "তবে, একদিন সে অসুস্থ হয়ে পড়ল। গ্রামবাসীরা তার জন্য {ubiquitous} হয়ে উঠল, সবাই সাহায্য করতে চাইল। কিন্তু সে জানত তার সময় সীমিত।",
+      "মৃত্যুর আগে সে বলল, \"জীবনে {ephemeral} সুখের পিছনে না ছুটে, {transcendent} অর্থ খোঁজা উচিত।\" এই ছিল তার শেষ বার্তা, যা গ্রামবাসীদের জীবন পরিবর্তন করে দিয়েছিল [p2]।"
     ],
     vocabulary: [
       {
-        id: "mysterious",
-        english: "mysterious",
-        bengaliPronunciation: "রহস্যময়",
-        meaning: "Something difficult to understand, explain, or identify; causing curiosity or wonder."
+        id: "hermit",
+        english: "hermit",
+        bengaliPronunciation: "সন্ন্যাসী",
+        meaning: "A person who lives in solitude, often for religious reasons; a recluse who withdraws from society."
       },
       {
-        id: "curious",
-        english: "curious",
-        bengaliPronunciation: "কৌতূহলী",
-        meaning: "Eager to learn or know something; showing interest."
+        id: "taciturn",
+        english: "taciturn",
+        bengaliPronunciation: "অল্পভাষী",
+        meaning: "Reserved or uncommunicative in speech; saying little; not inclined to conversation or verbal expression."
       },
       {
-        id: "treasure",
-        english: "treasure",
-        bengaliPronunciation: "ধনসম্পদ",
-        meaning: "A quantity of precious metals, gems, or other valuable objects."
+        id: "benevolent",
+        english: "benevolent",
+        bengaliPronunciation: "পরোপকারী",
+        meaning: "Well-meaning and kindly; characterized by or expressing goodwill or kindly feelings."
       },
       {
-        id: "map",
-        english: "map",
-        bengaliPronunciation: "মানচিত্র",
-        meaning: "A diagrammatic representation of an area showing physical features."
+        id: "naive",
+        english: "naive",
+        bengaliPronunciation: "সরলমনা",
+        meaning: "Showing a lack of experience, wisdom, or judgment; innocent and unworldly."
       },
       {
-        id: "passage",
-        english: "passage",
-        bengaliPronunciation: "পথ",
-        meaning: "A way of getting from one place to another, especially a narrow or difficult one."
+        id: "benevolence",
+        english: "benevolence",
+        bengaliPronunciation: "পরোপকারিতা",
+        meaning: "The quality of being well-meaning; kindness; an act of kindness."
       },
       {
-        id: "beginning",
-        english: "beginning",
-        bengaliPronunciation: "শুরু",
-        meaning: "The point in time or space at which something starts."
+        id: "austere",
+        english: "austere",
+        bengaliPronunciation: "কঠোর",
+        meaning: "Severe or strict in manner, attitude, or appearance; having no comforts or luxuries; simple and plain."
       },
       {
-        id: "explore",
-        english: "explore",
-        bengaliPronunciation: "অন্বেষণ করা",
-        meaning: "To travel through an unfamiliar area to learn about it."
+        id: "introspection",
+        english: "introspection",
+        bengaliPronunciation: "আত্মদর্শন",
+        meaning: "The examination or observation of one's own mental and emotional processes."
       },
       {
-        id: "backpack",
-        english: "backpack",
-        bengaliPronunciation: "ব্যাকপ্যাক",
-        meaning: "A bag with shoulder straps that allow it to be carried on someone's back."
+        id: "recluse",
+        english: "recluse",
+        bengaliPronunciation: "নিভৃতচারী",
+        meaning: "A person who lives in solitude or isolation from society."
       },
       {
-        id: "hidden",
-        english: "hidden",
-        bengaliPronunciation: "লুকানো",
-        meaning: "Kept out of sight; concealed."
+        id: "erudite",
+        english: "erudite",
+        bengaliPronunciation: "পণ্ডিত",
+        meaning: "Having or showing great knowledge or learning; scholarly and well-read."
       },
       {
-        id: "narrow",
-        english: "narrow",
-        bengaliPronunciation: "সরু",
-        meaning: "Of small width in relation to length or height."
+        id: "dilapidated",
+        english: "dilapidated",
+        bengaliPronunciation: "জীর্ণ",
+        meaning: "In a state of disrepair or ruin due to age or neglect."
       },
       {
-        id: "massive",
-        english: "massive",
-        bengaliPronunciation: "বিশাল",
-        meaning: "Large and heavy or solid."
+        id: "frugal",
+        english: "frugal",
+        bengaliPronunciation: "মিতব্যয়ী",
+        meaning: "Sparing or economical with regard to money or food; simple and plain."
       },
       {
-        id: "discovery",
-        english: "discovery",
-        bengaliPronunciation: "আবিষ্কার",
-        meaning: "The act or process of finding something or someone previously unknown."
+        id: "altruistic",
+        english: "altruistic",
+        bengaliPronunciation: "পরার্থপর",
+        meaning: "Showing a selfless concern for the well-being of others; unselfish."
       },
       {
-        id: "abandoned",
-        english: "abandoned",
-        bengaliPronunciation: "পরিত্যক্ত",
-        meaning: "Having been deserted or left."
+        id: "venerate",
+        english: "venerate",
+        bengaliPronunciation: "সম্মান করা",
+        meaning: "To regard with great respect; to revere or worship."
       },
       {
-        id: "valuable",
-        english: "valuable",
-        bengaliPronunciation: "মূল্যবান",
-        meaning: "Worth a lot of money; having great worth in a different way."
+        id: "sagacity",
+        english: "sagacity",
+        bengaliPronunciation: "প্রজ্ঞা",
+        meaning: "The quality of being wise and having sound judgment, especially as a result of experience."
       },
       {
-        id: "share",
-        english: "share",
-        bengaliPronunciation: "ভাগ করা",
-        meaning: "To give a portion of something to another or others."
+        id: "ostentatious",
+        english: "ostentatious",
+        bengaliPronunciation: "জাঁকজমকপূর্ণ",
+        meaning: "Characterized by pretentious or showy display; designed to impress."
       },
       {
-        id: "journey",
-        english: "journey",
-        bengaliPronunciation: "যাত্রা",
-        meaning: "An act of traveling from one place to another."
+        id: "humility",
+        english: "humility",
+        bengaliPronunciation: "বিনয়",
+        meaning: "The quality of having a modest or low view of one's importance; humbleness."
       },
       {
-        id: "adventures",
-        english: "adventures",
-        bengaliPronunciation: "অভিযানগুলি",
-        meaning: "Unusual, exciting, and possibly dangerous experiences or activities."
+        id: "esoteric",
+        english: "esoteric",
+        bengaliPronunciation: "গুপ্ত",
+        meaning: "Intended for or likely to be understood by only a small number of people with specialized knowledge."
+      },
+      {
+        id: "eloquence",
+        english: "eloquence",
+        bengaliPronunciation: "বাগ্মিতা",
+        meaning: "Fluent or persuasive speaking or writing; the art of using language in an elegant and effective way."
+      },
+      {
+        id: "perspicacity",
+        english: "perspicacity",
+        bengaliPronunciation: "তীক্ষ্ণবুদ্ধি",
+        meaning: "The quality of having a ready insight into things; shrewdness or discernment."
+      },
+      {
+        id: "ubiquitous",
+        english: "ubiquitous",
+        bengaliPronunciation: "সর্বব্যাপী",
+        meaning: "Present, appearing, or found everywhere; omnipresent."
+      },
+      {
+        id: "ephemeral",
+        english: "ephemeral",
+        bengaliPronunciation: "ক্ষণস্থায়ী",
+        meaning: "Lasting for a very short time; transitory; fleeting."
+      },
+      {
+        id: "transcendent",
+        english: "transcendent",
+        bengaliPronunciation: "অতিউচ্চ",
+        meaning: "Beyond or above the range of normal or physical human experience; surpassing the ordinary; exceptional."
       }
     ],
     footnotes: [
       {
-        id: "r1",
-        text: "পুরানো কলকাতায় অনেক গোপন সুড়ঙ্গ রয়েছে বলে ঐতিহাসিকরা বিশ্বাস করেন। (Historians believe there are many secret tunnels in old Kolkata.)"
+        id: "p1",
+        text: "বাংলা সংস্কৃতিতে, 'নিঃসঙ্গ জ্ঞানী' একটি গভীর ধারণা, যা প্রাচীন ভারতীয় সন্ন্যাসী ঐতিহ্যের থেকে এসেছে। (In Bengali culture, the 'solitary sage' is a profound concept derived from ancient Indian ascetic traditions.)"
       },
       {
-        id: "r2",
-        text: "এই বাক্যাংশটি একটি প্রাচীন বাংলা প্রবাদের ইংরেজি অনুবাদ। (This phrase is an English translation of an old Bengali proverb.)"
+        id: "p2",
+        text: "রবীন্দ্রনাথ ঠাকুর তাঁর অনেক লেখায় নিঃসঙ্গতা ও আধ্যাত্মিকতার সম্পর্ক নিয়ে আলোচনা করেছিলেন। (Rabindranath Tagore discussed the relationship between solitude and spirituality in many of his works.)"
       }
     ]
   },
   {
     id: 2,
-    title: "The Wise Fisherman",
-    description: "A tale of wisdom from an old fisherman who teaches valuable life lessons.",
-    category: "wisdom",
-    readingTime: 4,
+    title: "শহুরে সমস্যা (Urban Predicaments)",
+    description: "কলকাতার ব্যস্ত জীবনে এক তরুণীর প্রতিদিনের চ্যালেঞ্জ মোকাবেলার গল্প।",
+    category: "urban",
+    readingTime: 6,
     content: [
-      "A young man named সুমন visited a small fishing village near the Bay of Bengal.",
-      "There, he met an old fisherman who was known for his {wisdom}. লোকেরা তাকে 'জ্ঞানী জেলে' বলে ডাকত।",
-      "One day, সুমন asked the fisherman, \"How do you always catch the biggest fish? What's your {secret}?\"",
-      "The old man smiled and said, \"{Patience} is my secret. আমি সঠিক সময়ের জন্য অপেক্ষা করি।\"",
-      "\"But how do you know the right time?\" সুমন was {confused}.",
-      "\"When you've spent as many years as I have {observing} the sea, you begin to understand its rhythms [w1],\" the fisherman explained.",
-      "The fisherman continued, \"Many young people are in a {hurry} to succeed. তারা ভুল সমাধান খুঁজে।\"",
-      "\"What do you mean?\" সুমন was now very {interested} in the old man's philosophy.",
-      "\"Success is like fishing. It requires the right {strategy}, the right tools, and yes, sometimes a bit of luck.\"",
-      "সুমন thought about this and asked, \"So, should I just wait for opportunities to come?\"",
-      "The fisherman laughed, \"No, no! {Preparation} is also key. আমি প্রতিদিন আমার জাল ঠিক করি। I check my boat. I study the weather.\"",
-      "\"I think I {understand} now,\" said সুমন. \"It's about balance - being ready but also being patient.\"",
-      "\"Exactly! You have {learned} the most important lesson,\" smiled the old fisherman.",
-      "As সুমন was leaving, the fisherman gave him a small carved wooden fish as a {reminder} of their conversation.",
-      "Years later, when সুমন became a successful {businessman}, he kept that wooden fish on his desk to remember the wise fisherman's lessons [w2]."
+      "আধুনিক কলকাতা শহরে মিতালি একটি {prestigious} কোম্পানিতে চাকরি করে। তার প্রতিদিনের জীবন খুবই {hectic}, কিন্তু সে তার কাজে {meticulous} এবং সবসময় {punctual}।",
+      "একদিন সকালে অফিস যাওয়ার সময় সে দেখল যে শহরে জলবদ্ধতা হয়েছে। রাস্তাগুলো {inundated} ছিল এবং ট্রাফিক {gridlocked} হয়ে গিয়েছিল। মিতালি {perplexed} হয়ে ভাবতে লাগল কীভাবে অফিসে যাবে।",
+      "সে হঠাৎ একটি {novel} আইডিয়া পেল। সে একটি সাইকেল রিকশা নিল এবং পিছনের রাস্তা দিয়ে যাওয়ার সিদ্ধান্ত নিল। এটা একটু {unorthodox} পদ্ধতি ছিল, কিন্তু সে জানত যে {conventional} পথে যাওয়া এখন {futile} হবে [u1]।",
+      "রিকশাওয়ালা একটু {reluctant} ছিল, কিন্তু মিতালির {persuasive} কথা শুনে রাজি হয়ে গেল। তারা শহরের {labyrinthine} গলি দিয়ে যেতে লাগল। পথে মিতালি আরও অনেক মানুষকে দেখল যারা {ingenious} উপায়ে তাদের গন্তব্যে পৌঁছাচ্ছিল।",
+      "রাস্তায় এক জায়গায় একটি বড় গাছ পড়ে রাস্তা {obstructed} করে দিয়েছিল। সেখানে কিছু {altruistic} যুবক মিলে গাছটি সরাচ্ছিল। মিতালি তাদের সাহায্য করতে এগিয়ে গেল, যদিও তার {immaculate} পোশাক নষ্ট হওয়ার ভয় ছিল।",
+      "তার এই {spontaneous} সিদ্ধান্ত অন্যদের {galvanize} করল এবং আরও অনেকে এগিয়ে এলো। এই সামূহিক প্রচেষ্টায় গাছটি তাড়াতাড়ি সরানো গেল এবং পথ {traversable} হয়ে গেল।",
+      "শেষ পর্যন্ত মিতালি অফিসে পৌঁছাল, কিছুটা দেরি হলেও। তার বস যিনি সাধারণত খুব {fastidious}, সেদিন তার কাহিনী শুনে {empathetic} ছিলেন, কারণ তিনিও একই সমস্যার সম্মুখীন হয়েছিলেন।",
+      "সেই দিনের অভিজ্ঞতা মিতালিকে শেখাল যে শহুরে জীবনে {adaptability} খুবই গুরুত্বপূর্ণ এবং কখনও কখনও {serendipitous} ঘটনাগুলো আমাদের জীবনে সুন্দর পরিবর্তন নিয়ে আসে [u2]।"
     ],
     vocabulary: [
       {
-        id: "wisdom",
-        english: "wisdom",
-        bengaliPronunciation: "জ্ঞান",
-        meaning: "The quality of having experience, knowledge, and good judgment."
+        id: "prestigious",
+        english: "prestigious",
+        bengaliPronunciation: "মর্যাদাপূর্ণ",
+        meaning: "Inspiring respect and admiration; having high status or reputation."
       },
       {
-        id: "secret",
-        english: "secret",
-        bengaliPronunciation: "গোপন",
-        meaning: "Something that is kept or meant to be kept unknown or hidden from others."
+        id: "hectic",
+        english: "hectic",
+        bengaliPronunciation: "ব্যস্ততাপূর্ণ",
+        meaning: "Full of incessant or frantic activity; very busy and filled with activity."
       },
       {
-        id: "patience",
-        english: "patience",
-        bengaliPronunciation: "ধৈর্য",
-        meaning: "The capacity to accept or tolerate delay, trouble, or suffering without getting angry or upset."
+        id: "meticulous",
+        english: "meticulous",
+        bengaliPronunciation: "খুঁতখুঁতে",
+        meaning: "Showing great attention to detail; very careful and precise."
       },
       {
-        id: "confused",
-        english: "confused",
+        id: "punctual",
+        english: "punctual",
+        bengaliPronunciation: "সময়নিষ্ঠ",
+        meaning: "Happening or doing something at the agreed or proper time; on time."
+      },
+      {
+        id: "inundated",
+        english: "inundated",
+        bengaliPronunciation: "প্লাবিত",
+        meaning: "Overwhelmed by things or people to be dealt with; flooded."
+      },
+      {
+        id: "gridlocked",
+        english: "gridlocked",
+        bengaliPronunciation: "যানজটপূর্ণ",
+        meaning: "A situation of very severe traffic congestion where nothing can move."
+      },
+      {
+        id: "perplexed",
+        english: "perplexed",
         bengaliPronunciation: "বিভ্রান্ত",
-        meaning: "Unable to think clearly; bewildered or puzzled."
+        meaning: "Completely baffled; very puzzled or confused."
       },
       {
-        id: "observing",
-        english: "observing",
-        bengaliPronunciation: "পর্যবেক্ষণ করা",
-        meaning: "To watch carefully; to notice or perceive something and register it as significant."
+        id: "novel",
+        english: "novel",
+        bengaliPronunciation: "অভিনব",
+        meaning: "New or unusual in an interesting way; original or striking especially in conception or style."
       },
       {
-        id: "hurry",
-        english: "hurry",
-        bengaliPronunciation: "তাড়াহুড়ো",
-        meaning: "To move or act with haste, often due to a sense of urgency."
+        id: "unorthodox",
+        english: "unorthodox",
+        bengaliPronunciation: "অপ্রচলিত",
+        meaning: "Not conforming to traditional or accepted rules, beliefs, or methods."
       },
       {
-        id: "interested",
-        english: "interested",
-        bengaliPronunciation: "আগ্রহী",
-        meaning: "Showing curiosity or concern about something or someone; having a feeling of interest."
+        id: "conventional",
+        english: "conventional",
+        bengaliPronunciation: "প্রথাগত",
+        meaning: "Based on or in accordance with what is generally done or believed; traditional and ordinary."
       },
       {
-        id: "strategy",
-        english: "strategy",
-        bengaliPronunciation: "কৌশল",
-        meaning: "A plan of action designed to achieve a long-term or overall aim."
+        id: "futile",
+        english: "futile",
+        bengaliPronunciation: "নিষ্ফল",
+        meaning: "Incapable of producing any useful result; pointless or ineffective."
       },
       {
-        id: "preparation",
-        english: "preparation",
-        bengaliPronunciation: "প্রস্তুতি",
-        meaning: "The action or process of making something ready for use or consideration."
+        id: "reluctant",
+        english: "reluctant",
+        bengaliPronunciation: "অনিচ্ছুক",
+        meaning: "Unwilling and hesitant; disinclined to do something."
       },
       {
-        id: "understand",
-        english: "understand",
-        bengaliPronunciation: "বোঝা",
-        meaning: "To perceive the intended meaning of words, language, or a speaker; to interpret or view something in a particular way."
+        id: "persuasive",
+        english: "persuasive",
+        bengaliPronunciation: "প্রভাবশালী",
+        meaning: "Good at persuading someone to do or believe something through reasoning or argument."
       },
       {
-        id: "learned",
-        english: "learned",
-        bengaliPronunciation: "শিখেছেন",
-        meaning: "Having acquired knowledge or skill through study or experience."
+        id: "labyrinthine",
+        english: "labyrinthine",
+        bengaliPronunciation: "জটিল পথযুক্ত",
+        meaning: "Resembling a labyrinth in form or complexity; intricate and confusing."
       },
       {
-        id: "reminder",
-        english: "reminder",
-        bengaliPronunciation: "স্মারক",
-        meaning: "A thing that causes someone to remember something."
+        id: "ingenious",
+        english: "ingenious",
+        bengaliPronunciation: "কৌশলপূর্ণ",
+        meaning: "Clever, original, and inventive; showing resourcefulness and skill."
       },
       {
-        id: "businessman",
-        english: "businessman",
-        bengaliPronunciation: "ব্যবসায়ী",
-        meaning: "A man who works in business, especially at an executive level."
+        id: "obstructed",
+        english: "obstructed",
+        bengaliPronunciation: "বাধাগ্রস্ত",
+        meaning: "Blocked or hindered; impeded by obstacles."
+      },
+      {
+        id: "altruistic",
+        english: "altruistic",
+        bengaliPronunciation: "পরার্থপর",
+        meaning: "Showing a selfless concern for the well-being of others; unselfish."
+      },
+      {
+        id: "immaculate",
+        english: "immaculate",
+        bengaliPronunciation: "নিখুঁত",
+        meaning: "Perfectly clean, neat, or tidy; without spot or blemish; free from fault or error."
+      },
+      {
+        id: "spontaneous",
+        english: "spontaneous",
+        bengaliPronunciation: "স্বতঃস্ফূর্ত",
+        meaning: "Performed or occurring as a result of a sudden inner impulse or inclination; without premeditation."
+      },
+      {
+        id: "galvanize",
+        english: "galvanize",
+        bengaliPronunciation: "উদ্দীপিত করা",
+        meaning: "Shock or excite someone into taking action; stimulate into activity."
+      },
+      {
+        id: "traversable",
+        english: "traversable",
+        bengaliPronunciation: "অতিক্রমযোগ্য",
+        meaning: "Capable of being traversed or crossed; passable."
+      },
+      {
+        id: "fastidious",
+        english: "fastidious",
+        bengaliPronunciation: "বাছবিচারপূর্ণ",
+        meaning: "Very attentive to and concerned about accuracy and detail; difficult to please; excessively particular."
+      },
+      {
+        id: "empathetic",
+        english: "empathetic",
+        bengaliPronunciation: "সহানুভূতিশীল",
+        meaning: "Showing an ability to understand and share the feelings of another; empathic."
+      },
+      {
+        id: "adaptability",
+        english: "adaptability",
+        bengaliPronunciation: "খাপ খাওয়ানোর ক্ষমতা",
+        meaning: "The quality of being able to adjust to new conditions; the ability to change to suit different conditions."
+      },
+      {
+        id: "serendipitous",
+        english: "serendipitous",
+        bengaliPronunciation: "সৌভাগ্যক্রমে ঘটা",
+        meaning: "Occurring or discovered by chance in a happy or beneficial way; fortunate and unexpected."
       }
     ],
     footnotes: [
       {
-        id: "w1",
-        text: "বাংলাদেশ ও পশ্চিমবঙ্গের জেলেরা সমুদ্রের বিষয়ে গভীর জ্ঞান রাখেন, যা প্রজন্ম থেকে প্রজন্মে প্রেরিত হয়। (Fishermen in Bangladesh and West Bengal carry deep knowledge about the sea, passed down through generations.)"
+        id: "u1",
+        text: "কলকাতা শহরে বর্ষাকালে জলবদ্ধতা একটি নিয়মিত সমস্যা, যা প্রায়শই নাগরিক জীবনকে থমকে দেয়। (Waterlogging during the monsoon is a regular problem in Kolkata city, often bringing urban life to a standstill.)"
       },
       {
-        id: "w2",
-        text: "বাংলা সংস্কৃতিতে, কাঠের ছোট মূর্তিগুলি প্রায়ই শিক্ষামূলক উপহার হিসাবে দেওয়া হয়। (In Bengali culture, small wooden figurines are often given as educational gifts.)"
+        id: "u2",
+        text: "আধুনিক শহুরে বাংলা সংস্কৃতিতে, গলি এবং পার্শ্ব-রাস্তা নেভিগেশনের দক্ষতা একটি গুরুত্বপূর্ণ দৈনন্দিন কৌশল। (In modern urban Bengali culture, the skill of navigating alleys and side-streets is an important everyday strategy.)"
       }
     ]
   },
   {
     id: 3,
-    title: "The Ghost of Howrah Bridge",
-    description: "A mysterious tale set around Kolkata's famous landmark.",
-    category: "mystery",
-    readingTime: 6,
+    title: "অদৃশ্য সম্পদ (The Invisible Wealth)",
+    description: "একটি গ্রামীণ পরিবারের গল্প যারা উপলব্ধি করে যে প্রকৃত সম্পদ অর্থের বাইরেও থাকতে পারে।",
+    category: "moral",
+    readingTime: 4,
     content: [
-      "কলকাতার হাওড়া ব্রিজ শুধু একটি ঐতিহাসিক স্থাপত্য নয়, it's also the center of many {supernatural} stories.",
-      "অনেক টাক্সি ড্রাইভার বলেন যে মাঝরাতে তারা a {ghostly} figure দেখেছেন bridge এর উপর হাঁটতে.",
-      "One such driver, রিতেশ দা, told me his {encounter} with the bridge's famous ghost.",
-      "\"It was about 2 AM, and I was driving back from Howrah station. The bridge was almost {empty},\" he began.",
-      "\"হঠাৎ, I saw a woman in a white sari standing in the middle of the bridge. She looked {distressed}.\"",
-      "\"আমি গাড়ি থামিয়ে জিজ্ঞেস করলাম if she needed help, but when I got closer, I was {shocked} by what I saw.\"",
-      "রিতেশ দা's voice lowered to a whisper, \"She had no feet! She was {floating} above the ground!\"",
-      "\"I was {terrified} and quickly got back in my taxi. When I looked in my rearview mirror, she had vanished.\"",
-      "Local {historians} say the story may have originated from a real {tragedy} that happened in the 1940s [m1].",
-      "A young woman reportedly jumped off the bridge after receiving news of her husband's death in the war.",
-      "Some believe her spirit still {wanders} the bridge, looking for a way home.",
-      "Others say it's just an urban {legend} created to explain strange lights caused by fog and car headlights.",
-      "বিজ্ঞানী পাণ্ডেরা বলেন, \"Many such stories have {logical} explanations, but people prefer the mysterious version.\"",
-      "Whether you {believe} these stories or not, next time you cross Howrah Bridge at night, you might find yourself looking twice at any woman in a white sari [m2]."
+      "অনন্ত গ্রামের বাসিন্দা মনোহর চাষী একজন {impoverished} কৃষক ছিলেন। তিনি সংসার চালাতে {incessant} পরিশ্রম করতেন, কিন্তু প্রাকৃতিক দুর্যোগের কারণে প্রায়ই ফসল নষ্ট হয়ে যেত।",
+      "একদিন গ্রামে একজন {affluent} ব্যবসায়ী এলেন যিনি গ্রামে একটি কারখানা খুলতে চেয়েছিলেন। তিনি মনোহরের জমি কিনতে একটি {lucrative} প্রস্তাব দিলেন।",
+      "মনোহর {equivocal} ছিলেন। একদিকে অর্থের প্রলোভন, অন্যদিকে পূর্বপুরুষের জমি ছেড়ে দেওয়ার {trepidation}। তার স্ত্রী সবিতা তাকে বলল, \"অর্থ {ephemeral}, কিন্তু আমাদের ভূমি সম্পর্ক {perpetual}।\"",
+      "ব্যবসায়ী মনোহরকে {coerce} করার চেষ্টা করলেন, বলে যে তার ছেলেমেয়েরা {destitute} থাকবে যদি সে এই সুযোগ হারায়। গ্রামের কিছু লোক এই যুক্তি {corroborate} করল।",
+      "কিন্তু মনোহরের ছেলে যিনি শহরে পড়াশোনা করেন, তিনি গ্রামে ফিরে এসে {vociferous} প্রতিবাদ করলেন। তিনি {elucidate} করলেন যে কারখানা গ্রামের পরিবেশকে {contaminate} করবে।",
+      "গ্রামে একটি সভা ডাকা হল যেখানে মনোহর একটি {eloquent} বক্তৃতা দিলেন। তিনি বললেন, \"আমরা প্রকৃতির {custodian}, অর্থের {subservient} নই। আমাদের {paradigm} হওয়া উচিত টেকসই জীবন।\"",
+      "তার কথা শুনে গ্রামবাসীরা {contemplative} হয়ে গেলেন। ব্যবসায়ী {disdainful} হয়ে চলে গেলেন। কিন্তু পরের বছর গ্রামবাসীরা মিলে জৈব কৃষি শুরু করলেন, যা {sustainable} এবং {profitable} ছিল।",
+      "অল্প সময়ের মধ্যেই, তাদের গ্রাম {exemplary} হয়ে উঠল। সবাই বুঝল যে প্রকৃত সম্পদ হল জ্ঞান, একতা এবং প্রকৃতির সাথে {symbiotic} সম্পর্ক - যা অর্থ দিয়ে কেনা যায় না [m1]।"
     ],
     vocabulary: [
       {
-        id: "supernatural",
-        english: "supernatural",
-        bengaliPronunciation: "অলৌকিক",
-        meaning: "Attributed to some force beyond scientific understanding or the laws of nature."
+        id: "impoverished",
+        english: "impoverished",
+        bengaliPronunciation: "দরিদ্র",
+        meaning: "Made poor; lacking money, possessions, or resources; characterized by poverty."
       },
       {
-        id: "ghostly",
-        english: "ghostly",
-        bengaliPronunciation: "প্রেতাত্মা সদৃশ",
-        meaning: "Of or like a ghost; spectral."
+        id: "incessant",
+        english: "incessant",
+        bengaliPronunciation: "অবিরাম",
+        meaning: "Continuing without pause or interruption; ceaseless; unending."
       },
       {
-        id: "encounter",
-        english: "encounter",
-        bengaliPronunciation: "সাক্ষাৎ",
-        meaning: "An unexpected or casual meeting with someone or something."
+        id: "affluent",
+        english: "affluent",
+        bengaliPronunciation: "সম্পন্ন",
+        meaning: "Having a great deal of money; wealthy; abundant; plentiful."
       },
       {
-        id: "empty",
-        english: "empty",
-        bengaliPronunciation: "খালি",
-        meaning: "Containing nothing; not filled or occupied."
+        id: "lucrative",
+        english: "lucrative",
+        bengaliPronunciation: "লাভজনক",
+        meaning: "Producing a great deal of profit; financially rewarding or profitable."
       },
       {
-        id: "distressed",
-        english: "distressed",
-        bengaliPronunciation: "বিপন্ন",
-        meaning: "Suffering from anxiety, sorrow, or pain."
+        id: "equivocal",
+        english: "equivocal",
+        bengaliPronunciation: "দ্বিধাগ্রস্ত",
+        meaning: "Open to more than one interpretation; ambiguous or uncertain; unclear."
       },
       {
-        id: "shocked",
-        english: "shocked",
-        bengaliPronunciation: "হতবাক",
-        meaning: "Surprised and upset by something unexpected and unpleasant."
+        id: "trepidation",
+        english: "trepidation",
+        bengaliPronunciation: "আশঙ্কা",
+        meaning: "A feeling of fear or anxiety about something that may happen; trembling movement."
       },
       {
-        id: "floating",
-        english: "floating",
-        bengaliPronunciation: "ভাসমান",
-        meaning: "Suspended in liquid or air without sinking or falling."
+        id: "ephemeral",
+        english: "ephemeral",
+        bengaliPronunciation: "ক্ষণস্থায়ী",
+        meaning: "Lasting for a very short time; transitory; fleeting."
       },
       {
-        id: "terrified",
-        english: "terrified",
-        bengaliPronunciation: "আতঙ্কিত",
-        meaning: "Extremely frightened; filled with terror."
+        id: "perpetual",
+        english: "perpetual",
+        bengaliPronunciation: "চিরস্থায়ী",
+        meaning: "Never ending or changing; continuing or lasting forever; everlasting."
       },
       {
-        id: "historians",
-        english: "historians",
-        bengaliPronunciation: "ঐতিহাসিকরা",
-        meaning: "Experts or scholars who study or write about history."
+        id: "coerce",
+        english: "coerce",
+        bengaliPronunciation: "জোর করা",
+        meaning: "To persuade or force someone to do something by using threats or violence."
       },
       {
-        id: "tragedy",
-        english: "tragedy",
-        bengaliPronunciation: "বিয়োগান্ত ঘটনা",
-        meaning: "An event causing great suffering, destruction, and distress."
+        id: "destitute",
+        english: "destitute",
+        bengaliPronunciation: "নিঃস্ব",
+        meaning: "Extremely poor and lacking the means to provide for oneself; without resources."
       },
       {
-        id: "wanders",
-        english: "wanders",
-        bengaliPronunciation: "ঘুরে বেড়ায়",
-        meaning: "Moves around or travels aimlessly or without a fixed destination."
+        id: "corroborate",
+        english: "corroborate",
+        bengaliPronunciation: "সমর্থন করা",
+        meaning: "To confirm or give support to a statement, theory, or finding; to support with evidence."
       },
       {
-        id: "legend",
-        english: "legend",
-        bengaliPronunciation: "কিংবদন্তি",
-        meaning: "A traditional story sometimes popularly regarded as historical but not authenticated."
+        id: "vociferous",
+        english: "vociferous",
+        bengaliPronunciation: "উচ্চকণ্ঠ",
+        meaning: "Expressing or characterized by vehement opinions; loud and forceful; clamorous."
       },
       {
-        id: "logical",
-        english: "logical",
-        bengaliPronunciation: "যুক্তিসঙ্গত",
-        meaning: "According to the rules of logic or formal argument; characterized by clear thinking."
+        id: "elucidate",
+        english: "elucidate",
+        bengaliPronunciation: "ব্যাখ্যা করা",
+        meaning: "To make clear or plain; to explain or clarify something that is difficult to understand."
       },
       {
-        id: "believe",
-        english: "believe",
-        bengaliPronunciation: "বিশ্বাস করা",
-        meaning: "Accept that something is true, especially without proof."
+        id: "contaminate",
+        english: "contaminate",
+        bengaliPronunciation: "দূষিত করা",
+        meaning: "To make something impure, unclean, or poisonous by adding a harmful substance."
+      },
+      {
+        id: "eloquent",
+        english: "eloquent",
+        bengaliPronunciation: "বাগ্মী",
+        meaning: "Fluent or persuasive in speaking or writing; clearly expressing or indicating something."
+      },
+      {
+        id: "custodian",
+        english: "custodian",
+        bengaliPronunciation: "রক্ষক",
+        meaning: "A person who has responsibility for taking care of or protecting something."
+      },
+      {
+        id: "subservient",
+        english: "subservient",
+        bengaliPronunciation: "অধীনস্থ",
+        meaning: "Prepared to obey others unquestioningly; less important; subordinate."
+      },
+      {
+        id: "paradigm",
+        english: "paradigm",
+        bengaliPronunciation: "আদর্শ",
+        meaning: "A typical example or pattern of something; a standard or model."
+      },
+      {
+        id: "contemplative",
+        english: "contemplative",
+        bengaliPronunciation: "চিন্তাশীল",
+        meaning: "Spending time in or dedicated to deep thoughtful study or reflection."
+      },
+      {
+        id: "disdainful",
+        english: "disdainful",
+        bengaliPronunciation: "অবজ্ঞাপূর্ণ",
+        meaning: "Showing contempt or lack of respect; scornful or dismissive."
+      },
+      {
+        id: "sustainable",
+        english: "sustainable",
+        bengaliPronunciation: "টেকসই",
+        meaning: "Able to be maintained at a certain rate or level; conserving an ecological balance."
+      },
+      {
+        id: "profitable",
+        english: "profitable",
+        bengaliPronunciation: "লাভজনক",
+        meaning: "Yielding profit or financial gain; beneficial or useful."
+      },
+      {
+        id: "exemplary",
+        english: "exemplary",
+        bengaliPronunciation: "অনুকরণীয়",
+        meaning: "Serving as a desirable model or example; worthy of imitation; commendable."
+      },
+      {
+        id: "symbiotic",
+        english: "symbiotic",
+        bengaliPronunciation: "সহাবস্থানমূলক",
+        meaning: "Involving interaction between two different organisms living in close physical association, typically to the advantage of both."
       }
     ],
     footnotes: [
       {
         id: "m1",
-        text: "১৯৪০-এর দশকে দ্বিতীয় বিশ্বযুদ্ধের সময় বাংলায় অনেক যুবক ব্রিটিশ সেনাবাহিনীতে যোগ দিয়েছিলেন। (During the 1940s, many young Bengali men joined the British Army during World War II.)"
-      },
-      {
-        id: "m2",
-        text: "শাদা শাড়ি বাংলা সংস্কৃতিতে বিধবা মহিলাদের পোশাক হিসেবে পরিচিত। (The white sari is traditionally associated with widows in Bengali culture.)"
+        text: "বাংলাদেশ ও পশ্চিমবঙ্গের গ্রামীণ সমাজে জমির সাথে মানুষের সম্পর্ক শুধু অর্থনৈতিক নয়, সাংস্কৃতিক ও আধ্যাত্মিক। (In rural societies of Bangladesh and West Bengal, people's relationship with land is not merely economic but cultural and spiritual.)"
       }
     ]
   }
 ];
+
