@@ -12,8 +12,10 @@ const Story = () => {
   const [story, setStory] = useState(stories.find(s => s.id.toString() === id));
   const [footnoteVisibility, setFootnoteVisibility] = useState<Record<string, boolean>>({});
   
-  // Find the story in our data
+  // Scroll to top when component mounts or id changes
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     const foundStory = stories.find(s => s.id.toString() === id);
     
     if (foundStory) {

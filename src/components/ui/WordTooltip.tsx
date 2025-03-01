@@ -13,6 +13,7 @@ type WordTooltipProps = {
 const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const wordRef = useRef<HTMLSpanElement>(null);
 
   const copyToClipboard = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -26,6 +27,45 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     utterance.lang = 'en-US';
     window.speechSynthesis.speak(utterance);
   };
+
+  // Position the tooltip based on available space
+  useEffect(() => {
+    const positionTooltip = () => {
+      if (!isOpen || !tooltipRef.current || !wordRef.current) return;
+      
+      const tooltipEl = tooltipRef.current;
+      const wordEl = wordRef.current;
+      const wordRect = wordEl.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      
+      // Reset any previous positioning
+      tooltipEl.style.left = '50%';
+      tooltipEl.style.transform = 'translateX(-50%)';
+      
+      // Get tooltip dimensions after reset
+      const tooltipRect = tooltipEl.getBoundingClientRect();
+      
+      // Check if tooltip overflows on the left
+      if (tooltipRect.left < 0) {
+        tooltipEl.style.left = '0';
+        tooltipEl.style.transform = 'translateX(0)';
+      }
+      
+      // Check if tooltip overflows on the right
+      if (tooltipRect.right > viewportWidth) {
+        tooltipEl.style.left = 'auto';
+        tooltipEl.style.right = '0';
+        tooltipEl.style.transform = 'translateX(0)';
+      }
+    };
+
+    positionTooltip();
+    window.addEventListener('resize', positionTooltip);
+    
+    return () => {
+      window.removeEventListener('resize', positionTooltip);
+    };
+  }, [isOpen]);
 
   // Close tooltip when clicking outside
   useEffect(() => {
@@ -47,6 +87,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   return (
     <div className="relative inline-block" ref={tooltipRef}>
       <span 
+        ref={wordRef}
         className="english-word"
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -54,7 +95,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       </span>
       
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-64 transform -translate-x-1/2 left-1/2 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in">
+        <div className="absolute z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] transform -translate-x-1/2 left-1/2 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in">
           <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-4 h-4 rotate-45 bg-white dark:bg-gray-900 border-t border-l border-border"></div>
           
           <div className="flex justify-between items-center mb-2">
