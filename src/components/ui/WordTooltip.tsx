@@ -24,77 +24,40 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
 
   const speak = (e: React.MouseEvent) => {
     e.stopPropagation();
+    
+    // Create and configure the utterance
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-US';
+    utterance.rate = 0.9; // Slightly slower than default
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    
+    // Cancel any ongoing speech before starting new one
+    window.speechSynthesis.cancel();
+    
+    // Speak the word
     window.speechSynthesis.speak(utterance);
+    
+    // Show toast confirmation
+    toast.success(`Playing pronunciation for "${word}"`);
   };
 
-  // Position the tooltip based on available space
+  // Position the tooltip in the center of the screen
   useEffect(() => {
-    const positionTooltip = () => {
-      if (!isOpen || !tooltipRef.current || !wordRef.current || !tooltipContentRef.current) return;
-      
-      const tooltipEl = tooltipContentRef.current;
-      const wordRect = wordRef.current.getBoundingClientRect();
-      const tooltipRect = tooltipEl.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      
-      // Calculate the horizontal center of the word
-      const wordCenter = wordRect.left + (wordRect.width / 2);
-      
-      // Default position (centered)
-      let tooltipLeft = '50%';
-      let arrowLeft = '50%';
-      let transform = 'translateX(-50%)';
-      
-      // Minimum margin from screen edge (in pixels)
-      const edgeMargin = 16;
-      
-      // Check if tooltip would overflow left side
-      if (wordCenter - (tooltipRect.width / 2) < edgeMargin) {
-        // Position tooltip with proper margin from left edge
-        tooltipLeft = `${edgeMargin}px`;
-        transform = 'translateX(0)';
-        
-        // Calculate arrow position relative to tooltip
-        const arrowLeftPx = wordCenter - edgeMargin;
-        arrowLeft = `${arrowLeftPx}px`;
-      } 
-      // Check if tooltip would overflow right side
-      else if (wordCenter + (tooltipRect.width / 2) > viewportWidth - edgeMargin) {
-        // Position tooltip with proper margin from right edge
-        tooltipLeft = 'auto';
-        tooltipEl.style.right = `${edgeMargin}px`;
-        transform = 'translateX(0)';
-        
-        // Calculate arrow position relative to tooltip
-        const arrowRightPx = viewportWidth - wordCenter - edgeMargin;
-        tooltipEl.style.setProperty('--arrow-right', `${arrowRightPx}px`);
-        arrowLeft = 'auto';
-      }
-      
-      tooltipEl.style.left = tooltipLeft;
-      tooltipEl.style.transform = transform;
-      
-      // Set arrow position
-      const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
-      if (arrow) {
-        arrow.style.left = arrowLeft;
-        if (arrowLeft === 'auto') {
-          arrow.style.right = 'var(--arrow-right)';
-        } else {
-          arrow.style.right = 'auto';
-        }
-      }
-    };
-
-    // Position immediately and on resize
-    positionTooltip();
-    window.addEventListener('resize', positionTooltip);
+    if (!isOpen || !tooltipContentRef.current) return;
     
-    return () => {
-      window.removeEventListener('resize', positionTooltip);
-    };
+    const tooltipEl = tooltipContentRef.current;
+    
+    // Center the tooltip in the viewport
+    tooltipEl.style.left = '50%';
+    tooltipEl.style.top = '50%';
+    tooltipEl.style.transform = 'translate(-50%, -50%)';
+    
+    // Make sure the arrow is not visible when centered
+    const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+    if (arrow) {
+      arrow.style.display = 'none';
+    }
   }, [isOpen]);
 
   // Close tooltip when clicking outside
@@ -130,10 +93,9 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       {isOpen && (
         <div 
           ref={tooltipContentRef}
-          className="tooltip-content fixed z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
+          className="tooltip-content fixed z-50 w-80 max-w-[90vw] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
           style={{ 
-            top: `${wordRef.current?.getBoundingClientRect().bottom ?? 0}px`,
-            maxHeight: 'calc(80vh - 100px)',
+            maxHeight: '80vh',
             overflowY: 'auto'
           }}
         >
