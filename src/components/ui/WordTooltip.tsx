@@ -12,7 +12,7 @@ type WordTooltipProps = {
 
 const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const tooltipRef = useRef<HTMLSpanElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
   const tooltipContentRef = useRef<HTMLDivElement>(null);
 
@@ -54,8 +54,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
         transform = 'translateX(0)';
         
         // Calculate arrow position relative to tooltip
-        // Arrow should point at word center
-        const arrowLeftPx = wordCenter - 10; // 10px is half of arrow width
+        const arrowLeftPx = Math.max(wordCenter, 20); // Ensure arrow is not too close to edge
         arrowLeft = `${arrowLeftPx}px`;
       } 
       // Check if tooltip would overflow right side
@@ -66,8 +65,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
         transform = 'translateX(0)';
         
         // Calculate arrow position relative to tooltip
-        const distanceFromRight = viewportWidth - wordCenter;
-        const arrowRightPx = distanceFromRight - 10;
+        const arrowRightPx = Math.max(viewportWidth - wordCenter, 20);
         tooltipEl.style.setProperty('--arrow-right', `${arrowRightPx}px`);
         arrowLeft = 'auto';
       }
@@ -114,10 +112,10 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   }, [isOpen]);
 
   return (
-    <span className="relative inline-block" ref={tooltipRef}>
+    <div className="inline-block relative" ref={tooltipRef}>
       <span 
         ref={wordRef}
-        className="english-word cursor-pointer"
+        className="english-word"
         onClick={(e) => {
           e.stopPropagation();
           setIsOpen(!isOpen);
@@ -129,8 +127,12 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       {isOpen && (
         <div 
           ref={tooltipContentRef}
-          className="tooltip-content absolute z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
-          style={{ top: '100%' }}
+          className="tooltip-content fixed z-50 mt-2 w-64 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
+          style={{ 
+            top: `${wordRef.current?.getBoundingClientRect().bottom ?? 0}px`,
+            maxHeight: 'calc(80vh - 100px)',
+            overflowY: 'auto'
+          }}
         >
           <div className="tooltip-arrow absolute -top-2 w-4 h-4 rotate-45 bg-white dark:bg-gray-900 border-t border-l border-border"></div>
           
@@ -163,7 +165,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
           </div>
         </div>
       )}
-    </span>
+    </div>
   );
 };
 
