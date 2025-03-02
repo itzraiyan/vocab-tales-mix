@@ -47,25 +47,28 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       let arrowLeft = '50%';
       let transform = 'translateX(-50%)';
       
+      // Minimum margin from screen edge (in pixels)
+      const edgeMargin = 16;
+      
       // Check if tooltip would overflow left side
-      if (wordCenter - (tooltipRect.width / 2) < 10) {
-        // Position tooltip at left edge with padding
-        tooltipLeft = '0';
+      if (wordCenter - (tooltipRect.width / 2) < edgeMargin) {
+        // Position tooltip with proper margin from left edge
+        tooltipLeft = `${edgeMargin}px`;
         transform = 'translateX(0)';
         
         // Calculate arrow position relative to tooltip
-        const arrowLeftPx = Math.max(wordCenter, 20); // Ensure arrow is not too close to edge
+        const arrowLeftPx = wordCenter - edgeMargin;
         arrowLeft = `${arrowLeftPx}px`;
       } 
       // Check if tooltip would overflow right side
-      else if (wordCenter + (tooltipRect.width / 2) > viewportWidth - 10) {
-        // Position tooltip at right edge with padding
+      else if (wordCenter + (tooltipRect.width / 2) > viewportWidth - edgeMargin) {
+        // Position tooltip with proper margin from right edge
         tooltipLeft = 'auto';
-        tooltipEl.style.right = '0';
+        tooltipEl.style.right = `${edgeMargin}px`;
         transform = 'translateX(0)';
         
         // Calculate arrow position relative to tooltip
-        const arrowRightPx = Math.max(viewportWidth - wordCenter, 20);
+        const arrowRightPx = viewportWidth - wordCenter - edgeMargin;
         tooltipEl.style.setProperty('--arrow-right', `${arrowRightPx}px`);
         arrowLeft = 'auto';
       }
