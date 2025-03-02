@@ -25,35 +25,41 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   const speak = (e: React.MouseEvent) => {
     e.stopPropagation();
     
-    // Create and configure the utterance
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9; // Slightly slower than default
-    utterance.pitch = 1.0;
-    utterance.volume = 1.0;
-    
-    // Cancel any ongoing speech before starting new one
-    window.speechSynthesis.cancel();
-    
-    // Speak the word
-    window.speechSynthesis.speak(utterance);
-    
-    // Show toast confirmation
-    toast.success(`Playing pronunciation for "${word}"`);
+    try {
+      // Create and configure the utterance
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.9; // Slightly slower than default
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      // Cancel any ongoing speech before starting new one
+      window.speechSynthesis.cancel();
+      
+      // Speak the word
+      window.speechSynthesis.speak(utterance);
+      
+      // Show toast confirmation
+      toast.success(`Playing pronunciation for "${word}"`);
+    } catch (error) {
+      console.error('Speech synthesis error:', error);
+      toast.error('Unable to play pronunciation');
+    }
   };
 
-  // Position the tooltip in the center of the screen
+  // Center the tooltip perfectly in the middle of the screen
   useEffect(() => {
     if (!isOpen || !tooltipContentRef.current) return;
     
     const tooltipEl = tooltipContentRef.current;
     
-    // Center the tooltip in the viewport
+    // Center the tooltip exactly in the middle of the viewport
+    tooltipEl.style.position = 'fixed';
     tooltipEl.style.left = '50%';
     tooltipEl.style.top = '50%';
     tooltipEl.style.transform = 'translate(-50%, -50%)';
     
-    // Make sure the arrow is not visible when centered
+    // Hide the arrow when centered in the middle
     const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
     if (arrow) {
       arrow.style.display = 'none';
@@ -93,7 +99,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       {isOpen && (
         <div 
           ref={tooltipContentRef}
-          className="tooltip-content fixed z-50 w-80 max-w-[90vw] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
+          className="tooltip-content z-50 w-80 max-w-[90vw] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
           style={{ 
             maxHeight: '80vh',
             overflowY: 'auto'
