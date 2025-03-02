@@ -47,17 +47,21 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     }
   };
 
-  // Center the tooltip perfectly in the middle of the screen
+  // Position the tooltip in the center of the screen with proper viewport constraints
   useEffect(() => {
     if (!isOpen || !tooltipContentRef.current) return;
     
     const tooltipEl = tooltipContentRef.current;
     
-    // Center the tooltip exactly in the middle of the viewport
+    // Fixed positioning in the center of the viewport
     tooltipEl.style.position = 'fixed';
     tooltipEl.style.left = '50%';
     tooltipEl.style.top = '50%';
     tooltipEl.style.transform = 'translate(-50%, -50%)';
+    
+    // Ensure the tooltip doesn't overflow the viewport
+    tooltipEl.style.maxWidth = '90vw';
+    tooltipEl.style.maxHeight = '80vh';
     
     // Hide the arrow when centered in the middle
     const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
@@ -99,14 +103,12 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       {isOpen && (
         <div 
           ref={tooltipContentRef}
-          className="tooltip-content z-50 w-80 max-w-[90vw] bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
+          className="tooltip-content z-50 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
           style={{ 
-            maxHeight: '80vh',
+            width: '320px',
             overflowY: 'auto'
           }}
         >
-          <div className="tooltip-arrow absolute -top-2 w-4 h-4 rotate-45 bg-white dark:bg-gray-900 border-t border-l border-border"></div>
-          
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-medium">{word}</h3>
             <div className="flex space-x-1">
