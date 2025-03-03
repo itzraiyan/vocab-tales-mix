@@ -47,26 +47,104 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     }
   };
 
-  // Position the tooltip in the center of the screen with proper viewport constraints
+  // Calculate optimal position for the tooltip
   useEffect(() => {
     if (!isOpen || !tooltipContentRef.current) return;
     
     const tooltipEl = tooltipContentRef.current;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
     
-    // Fixed positioning in the center of the viewport
-    tooltipEl.style.position = 'fixed';
-    tooltipEl.style.left = '50%';
-    tooltipEl.style.top = '50%';
-    tooltipEl.style.transform = 'translate(-50%, -50%)';
-    
-    // Ensure the tooltip doesn't overflow the viewport
-    tooltipEl.style.maxWidth = '90vw';
-    tooltipEl.style.maxHeight = '80vh';
-    
-    // Hide the arrow when centered in the middle
-    const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
-    if (arrow) {
-      arrow.style.display = 'none';
+    // For mobile devices (viewport width less than 768px)
+    if (viewportWidth < 768) {
+      // Center in viewport with fixed positioning
+      tooltipEl.style.position = 'fixed';
+      tooltipEl.style.width = 'min(320px, 85vw)'; // Either 320px or 85% of viewport width, whichever is smaller
+      tooltipEl.style.left = '50%';
+      tooltipEl.style.top = '50%';
+      tooltipEl.style.transform = 'translate(-50%, -50%)';
+      tooltipEl.style.maxHeight = '70vh';
+      
+      // Hide the arrow on mobile
+      const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+      if (arrow) {
+        arrow.style.display = 'none';
+      }
+    } else {
+      // On desktop, we have more space
+      // By default, try to position the tooltip near the word
+      const wordRect = wordRef.current?.getBoundingClientRect();
+      
+      if (!wordRect) return;
+      
+      // Basic positioning above the word
+      tooltipEl.style.position = 'fixed';
+      tooltipEl.style.width = '320px';
+      
+      // Initial position calculation
+      let left = wordRect.left + (wordRect.width / 2) - 160; // Center tooltip horizontally over word
+      let top = wordRect.top - 10; // Position above the word
+      
+      // Check if tooltip would go off the left edge
+      if (left < 20) {
+        left = 20;
+      }
+      
+      // Check if tooltip would go off the right edge
+      if (left + 320 > viewportWidth - 20) {
+        left = viewportWidth - 340; // 20px margin from right edge
+      }
+      
+      // Check if tooltip would go off the top edge
+      // If so, position it below the word instead
+      if (top < 60) { // Allow for some space at top for browser UI
+        top = wordRect.bottom + 10;
+        
+        // If it still doesn't fit in the viewport, center it
+        if (top + 300 > viewportHeight - 20) { // assuming max tooltip height
+          left = '50%';
+          top = '50%';
+          tooltipEl.style.transform = 'translate(-50%, -50%)';
+          
+          // Hide the arrow when centered
+          const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+          if (arrow) {
+            arrow.style.display = 'none';
+          }
+          
+          return;
+        }
+      }
+      
+      tooltipEl.style.left = typeof left === 'string' ? left : `${left}px`;
+      tooltipEl.style.top = typeof top === 'string' ? top : `${top}px`;
+      
+      // Only use transform if we're centering
+      if (typeof left === 'string' && left === '50%') {
+        tooltipEl.style.transform = 'translate(-50%, -50%)';
+      } else {
+        tooltipEl.style.transform = 'none';
+      }
+      
+      // Position arrow based on tooltip position
+      const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+      if (arrow) {
+        arrow.style.display = 'block';
+        
+        // If tooltip is above the word
+        if (parseInt(tooltipEl.style.top) < wordRect.top) {
+          arrow.style.top = 'auto';
+          arrow.style.bottom = '-8px';
+          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - left - 4}px`;
+          arrow.style.transform = 'rotate(225deg)';
+        } else {
+          // If tooltip is below the word
+          arrow.style.top = '-8px';
+          arrow.style.bottom = 'auto';
+          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - left - 4}px`;
+          arrow.style.transform = 'rotate(45deg)';
+        }
+      }
     }
   }, [isOpen]);
 
@@ -84,6 +162,28 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Handle window resize - reposition tooltip if open
+  useEffect(() => {
+    const handleResize = () => {
+      // Trigger the positioning effect by toggling a state
+      if (isOpen && tooltipContentRef.current) {
+        // Force DOM recalculation by temporarily hiding and reshowing
+        const tooltip = tooltipContentRef.current;
+        tooltip.style.opacity = '0';
+        setTimeout(() => {
+          // This will trigger the positioning useEffect
+          tooltip.style.opacity = '1';
+        }, 10);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
     };
   }, [isOpen]);
 
@@ -105,10 +205,11 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
           ref={tooltipContentRef}
           className="tooltip-content z-50 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-border p-4 animate-scale-in"
           style={{ 
-            width: '320px',
             overflowY: 'auto'
           }}
         >
+          <div className="tooltip-arrow absolute w-4 h-4 rotate-45 bg-white dark:bg-gray-900 border-t border-l border-border"></div>
+          
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-medium">{word}</h3>
             <div className="flex space-x-1">
