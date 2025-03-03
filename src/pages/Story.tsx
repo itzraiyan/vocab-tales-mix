@@ -181,7 +181,9 @@ const Story = () => {
               <div key={vocab.id} className="glass-card p-4 rounded-lg">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-medium text-lg">{vocab.english} <span className="text-muted-foreground">({vocab.bengaliPronunciation})</span></h3>
+                    <h3 className="font-medium text-lg">
+                      {vocab.english} <span className="text-muted-foreground">({vocab.bengaliPronunciation})</span>
+                    </h3>
                   </div>
                 </div>
                 <p className="text-sm mt-2">{vocab.meaning}</p>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Copy, Volume2, X } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -12,11 +12,16 @@ type WordTooltipProps = {
 
 const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const copyToClipboard = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigator.clipboard.writeText(word);
-    toast.success('Word copied to clipboard!');
+    
+    // Create a formatted text to copy
+    const textToCopy = `${word} (${bengaliPronunciation})\n${meaning}`;
+    
+    navigator.clipboard.writeText(textToCopy);
+    toast.success('Word information copied to clipboard!');
   };
 
   const speak = (e: React.MouseEvent) => {
@@ -45,17 +50,34 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   };
 
   // Close when clicking outside or pressing Escape
-  React.useEffect(() => {
+  useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
-      if (isOpen && e.target instanceof Node) {
-        // Close if we click outside the modal content
-        setIsOpen(false);
+      if (isOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        // Close animation
+        if (modalRef.current) {
+          modalRef.current.classList.remove('animate-in', 'fade-in-0', 'zoom-in-95');
+          modalRef.current.classList.add('animate-out', 'fade-out-0', 'zoom-out-95');
+          
+          // Wait for animation to finish before closing
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 200); // Match animation duration
+        }
       }
     };
 
     const handleEscape = (e: KeyboardEvent) => {
       if (isOpen && e.key === 'Escape') {
-        setIsOpen(false);
+        // Close animation
+        if (modalRef.current) {
+          modalRef.current.classList.remove('animate-in', 'fade-in-0', 'zoom-in-95');
+          modalRef.current.classList.add('animate-out', 'fade-out-0', 'zoom-out-95');
+          
+          // Wait for animation to finish before closing
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 200); // Match animation duration
+        }
       }
     };
 
@@ -67,6 +89,21 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isOpen]);
+
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    // Close animation
+    if (modalRef.current) {
+      modalRef.current.classList.remove('animate-in', 'fade-in-0', 'zoom-in-95');
+      modalRef.current.classList.add('animate-out', 'fade-out-0', 'zoom-out-95');
+      
+      // Wait for animation to finish before closing
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 200); // Match animation duration
+    }
+  };
 
   return (
     <>
@@ -80,11 +117,14 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm">
           <div 
+            ref={modalRef}
             className="bg-background w-[90%] max-w-md rounded-lg shadow-lg border border-border animate-in fade-in-0 zoom-in-95 p-5 max-h-[90vh] overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold text-lg">{word} <span className="text-muted-foreground">({bengaliPronunciation})</span></h3>
+              <h3 className="font-semibold text-lg flex items-center">
+                <span>{word}</span>
+              </h3>
               <div className="flex space-x-2">
                 <button 
                   onClick={speak} 
@@ -101,7 +141,7 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
                   <Copy className="w-4 h-4" />
                 </button>
                 <button 
-                  onClick={() => setIsOpen(false)} 
+                  onClick={handleCloseClick} 
                   className="p-1.5 rounded-full bg-destructive/10 hover:bg-destructive/20 text-destructive transition-colors"
                   aria-label="Close"
                 >
@@ -110,8 +150,18 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
               </div>
             </div>
             
-            <div className="mt-2">
-              <p className="text-foreground">{meaning}</p>
+            <div className="mt-2 space-y-2">
+              {/* Transliteration */}
+              <p className="text-foreground">
+                <span className="text-muted-foreground text-sm">Transliteration: </span>
+                <span className="font-medium">{bengaliPronunciation}</span>
+              </p>
+              
+              {/* Translation */}
+              <p className="text-foreground">
+                <span className="text-muted-foreground text-sm">Translation: </span>
+                <span className="font-medium">{meaning}</span>
+              </p>
             </div>
           </div>
         </div>
