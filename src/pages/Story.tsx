@@ -57,7 +57,6 @@ const Story = () => {
           const vocab = story.vocabulary.find(v => v.id === wordId);
           
           if (vocab) {
-            // Return the WordTooltip as a span, not directly in the paragraph
             return (
               <WordTooltip
                 key={`word-${pIndex}-${partIndex}`}
@@ -182,10 +181,7 @@ const Story = () => {
               <div key={vocab.id} className="glass-card p-4 rounded-lg">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-medium text-lg">{vocab.english}</h3>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      {vocab.bengaliPronunciation}
-                    </p>
+                    <h3 className="font-medium text-lg">{vocab.english} <span className="text-muted-foreground">({vocab.bengaliPronunciation})</span></h3>
                   </div>
                 </div>
                 <p className="text-sm mt-2">{vocab.meaning}</p>
