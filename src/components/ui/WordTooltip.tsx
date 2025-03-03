@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Copy, Volume2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -11,7 +12,7 @@ type WordTooltipProps = {
 
 const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTooltipProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const tooltipRef = useRef<HTMLSpanElement>(null);  // Changed from div to span
+  const tooltipRef = useRef<HTMLSpanElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
   const tooltipContentRef = useRef<HTMLDivElement>(null);
 
@@ -46,91 +47,102 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
     }
   };
 
-  // Updated positioning code to ensure tooltip is always visible
+  // Improved positioning logic to ensure tooltip is always visible
   useEffect(() => {
-    if (!isOpen || !tooltipContentRef.current) return;
+    if (!isOpen || !tooltipContentRef.current || !wordRef.current) return;
     
     const tooltipEl = tooltipContentRef.current;
+    const wordRect = wordRef.current.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+    const tooltipWidth = 320;
+    const tooltipHeight = 200; // Approximate height
     
-    // For mobile devices or small screens (viewport width less than 768px)
+    // Reset styles first
+    tooltipEl.style.position = 'fixed';
+    tooltipEl.style.maxHeight = '70vh';
+    tooltipEl.style.transform = 'none';
+    
+    // For mobile devices (viewport width less than 768px)
     if (viewportWidth < 768) {
-      // Center in viewport
-      tooltipEl.style.position = 'fixed';
+      // Center in viewport with fixed positioning
       tooltipEl.style.width = 'min(320px, 85vw)';
       tooltipEl.style.left = '50%';
       tooltipEl.style.top = '50%';
       tooltipEl.style.transform = 'translate(-50%, -50%)';
-      tooltipEl.style.maxHeight = '70vh';
       
-      // Hide arrow on mobile
+      // Hide the arrow on mobile
       const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
       if (arrow) {
         arrow.style.display = 'none';
       }
-    } else {
-      // On larger screens, position near the word but ensure it's visible
-      const wordRect = wordRef.current?.getBoundingClientRect();
+      return;
+    }
+    
+    // On desktop, position tooltip intelligently
+    tooltipEl.style.width = `${tooltipWidth}px`;
+    
+    // Horizontal positioning logic
+    let leftPos = wordRect.left + (wordRect.width / 2) - (tooltipWidth / 2);
+    
+    // Ensure tooltip doesn't go off left edge
+    leftPos = Math.max(20, leftPos);
+    
+    // Ensure tooltip doesn't go off right edge
+    leftPos = Math.min(leftPos, viewportWidth - tooltipWidth - 20);
+    
+    // Vertical positioning logic - try above the word first
+    let topPos = wordRect.top - tooltipHeight - 15;
+    let arrowOnTop = false;
+    
+    // If doesn't fit above, try below
+    if (topPos < 50) {
+      topPos = wordRect.bottom + 15;
+      arrowOnTop = true;
       
-      if (!wordRect) return;
-      
-      tooltipEl.style.position = 'fixed';
-      tooltipEl.style.width = '320px';
-      
-      // Calculate initial position
-      let left: number | string = wordRect.left;
-      let top: number | string = wordRect.bottom + 10; // Position below the word by default
-      
-      // Check if tooltip would go off the right edge
-      if (left + 320 > viewportWidth - 20) {
-        left = Math.max(20, viewportWidth - 340); // At least 20px from left
-      }
-      
-      // Check if tooltip would go off the bottom edge
-      if (top + 200 > viewportHeight - 20) { // assuming tooltip height ~200px
-        // Try positioning above the word instead
-        top = wordRect.top - 210; // 200px height + 10px gap
+      // If doesn't fit below either, position at center of screen
+      if (topPos + tooltipHeight > viewportHeight - 20) {
+        leftPos = viewportWidth / 2 - tooltipWidth / 2;
+        topPos = viewportHeight / 2 - tooltipHeight / 2;
         
-        // If still doesn't fit, center it
-        if (top < 20) {
-          tooltipEl.style.left = '50%';
-          tooltipEl.style.top = '50%';
-          tooltipEl.style.transform = 'translate(-50%, -50%)';
-          
-          // Hide arrow when centered
-          const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
-          if (arrow) {
-            arrow.style.display = 'none';
-          }
-          return;
+        // Hide arrow when centered
+        const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+        if (arrow) {
+          arrow.style.display = 'none';
         }
       }
+    }
+    
+    // Apply calculated position
+    tooltipEl.style.left = `${leftPos}px`;
+    tooltipEl.style.top = `${topPos}px`;
+    
+    // Position arrow
+    const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
+    if (arrow) {
+      arrow.style.display = 'block';
       
-      tooltipEl.style.left = typeof left === 'string' ? left : `${left}px`;
-      tooltipEl.style.top = typeof top === 'string' ? top : `${top}px`;
-      tooltipEl.style.transform = 'none'; // Clear any transform
-      
-      // Position arrow
-      const arrow = tooltipEl.querySelector('.tooltip-arrow') as HTMLElement;
-      if (arrow) {
-        arrow.style.display = 'block';
-        
-        // Position arrow depending on whether tooltip is above or below word
-        if (typeof top === 'number' && top < wordRect.top) {
-          // Tooltip is above word
-          arrow.style.top = 'auto';
-          arrow.style.bottom = '-8px';
-          arrow.style.left = `${Math.min(160, wordRect.left + (wordRect.width / 2) - (typeof left === 'number' ? left : 0))}px`;
-          arrow.style.transform = 'rotate(225deg)';
-        } else {
-          // Tooltip is below word
-          arrow.style.top = '-8px';
-          arrow.style.bottom = 'auto';
-          arrow.style.left = `${Math.min(160, wordRect.left + (wordRect.width / 2) - (typeof left === 'number' ? left : 0))}px`;
-          arrow.style.transform = 'rotate(45deg)';
-        }
+      if (arrowOnTop) {
+        // Arrow on top (tooltip is below word)
+        arrow.style.top = '-8px';
+        arrow.style.bottom = 'auto';
+        arrow.style.transform = 'rotate(45deg)';
+      } else {
+        // Arrow on bottom (tooltip is above word)
+        arrow.style.top = 'auto';
+        arrow.style.bottom = '-8px';
+        arrow.style.transform = 'rotate(225deg)';
       }
+      
+      // Position arrow horizontally
+      const arrowLeftPos = Math.min(
+        tooltipWidth - 20, 
+        Math.max(
+          20, 
+          wordRect.left + (wordRect.width / 2) - leftPos
+        )
+      );
+      arrow.style.left = `${arrowLeftPos}px`;
     }
   }, [isOpen]);
 
@@ -154,13 +166,11 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
   // Handle window resize - reposition tooltip if open
   useEffect(() => {
     const handleResize = () => {
-      // Trigger the positioning effect by toggling a state
       if (isOpen && tooltipContentRef.current) {
         // Force DOM recalculation by temporarily hiding and reshowing
         const tooltip = tooltipContentRef.current;
         tooltip.style.opacity = '0';
         setTimeout(() => {
-          // This will trigger the positioning useEffect
           tooltip.style.opacity = '1';
         }, 10);
       }
