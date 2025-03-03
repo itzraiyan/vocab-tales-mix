@@ -57,6 +57,7 @@ const Story = () => {
           const vocab = story.vocabulary.find(v => v.id === wordId);
           
           if (vocab) {
+            // Return the WordTooltip as a span, not directly in the paragraph
             return (
               <WordTooltip
                 key={`word-${pIndex}-${partIndex}`}
