@@ -82,8 +82,8 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
       tooltipEl.style.width = '320px';
       
       // Initial position calculation
-      let left = wordRect.left + (wordRect.width / 2) - 160; // Center tooltip horizontally over word
-      let top = wordRect.top - 10; // Position above the word
+      let left: number | string = wordRect.left + (wordRect.width / 2) - 160; // Center tooltip horizontally over word
+      let top: number | string = wordRect.top - 10; // Position above the word
       
       // Check if tooltip would go off the left edge
       if (left < 20) {
@@ -102,8 +102,9 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
         
         // If it still doesn't fit in the viewport, center it
         if (top + 300 > viewportHeight - 20) { // assuming max tooltip height
-          left = '50%';
-          top = '50%';
+          // Set center position directly in the styles
+          tooltipEl.style.left = '50%';
+          tooltipEl.style.top = '50%';
           tooltipEl.style.transform = 'translate(-50%, -50%)';
           
           // Hide the arrow when centered
@@ -135,13 +136,13 @@ const WordTooltip = ({ word, bengaliPronunciation, meaning, children }: WordTool
         if (parseInt(tooltipEl.style.top) < wordRect.top) {
           arrow.style.top = 'auto';
           arrow.style.bottom = '-8px';
-          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - left - 4}px`;
+          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - (typeof left === 'number' ? left : 0) - 4}px`;
           arrow.style.transform = 'rotate(225deg)';
         } else {
           // If tooltip is below the word
           arrow.style.top = '-8px';
           arrow.style.bottom = 'auto';
-          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - left - 4}px`;
+          arrow.style.left = `${wordRect.left + (wordRect.width / 2) - (typeof left === 'number' ? left : 0) - 4}px`;
           arrow.style.transform = 'rotate(45deg)';
         }
       }
